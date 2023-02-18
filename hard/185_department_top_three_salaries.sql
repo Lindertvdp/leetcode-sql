@@ -1,7 +1,7 @@
-select temp.Department, temp.Employee, temp.Salary
-from (
-    select d.name as Department, e.name as Employee, e.salary as Salary, dense_rank() over(partition by d.id order by e.salary desc) n
-    from Employee e
-    join Department d on d.id = e.departmentId
-) as temp
-where temp.n <= 3
+SELECT temp.Department, temp.Employee, temp.Salary
+FROM (
+    SELECT d.name AS Department, e.name AS Employee, e.salary AS Salary, DENSE_RANK() OVER(PARTITION BY d.id ORDER BY e.salary DESC) n
+    FROM Employee e
+    JOIN Department d ON d.id = e.departmentId
+) AS temp
+WHERE temp.n <= 3

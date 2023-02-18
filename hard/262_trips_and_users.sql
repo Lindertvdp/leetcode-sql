@@ -1,8 +1,8 @@
-select trip.request_at as Day,
-round(sum(case when trip.status in ('cancelled_by_driver', 'cancelled_by_client') then 1 else 0 end)/count(1), 2) as 'Cancellation Rate'
-from Trips trip
-join Users client on client.users_id = trip.client_id
-join Users driver on driver.users_id = trip.driver_id
-where client.banned = 'No' and driver.banned = 'No'
-and trip.request_at between '2013-10-01' and '2013-10-03'
-group by trip.request_at
+SELECT trip.request_at AS Day,
+ROUND(SUM(CASE WHEN trip.status IN ('cancelled_by_driver', 'cancelled_by_client') THEN 1 ELSE 0 END)/COUNT(1), 2) AS 'Cancellation Rate'
+FROM Trips trip
+INNER JOIN Users client ON client.users_id = trip.client_id
+INNER JOIN Users driver ON driver.users_id = trip.driver_id
+WHERE client.banned = 'No' AND driver.banned = 'No'
+AND trip.request_at BETWEEN '2013-10-01' AND '2013-10-03'
+GROUP BY trip.request_at
